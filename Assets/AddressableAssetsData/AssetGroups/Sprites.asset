@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Sprites
+  m_EditorClassIdentifier: 
+  m_GroupName: Sprites
+  m_Data:
+    m_SerializedData: []
+  m_GUID: b41977e0fd1a47d43a5c3d132de75d18
+  m_SerializeEntries:
+  - m_GUID: 1a6d85ad073f9cd4e976ffb4d9124349
+    m_Address: Blue_TileSet_Full.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreAll
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e8812b7ed03dee4096fbe3e27581f1a
+    m_Address: Green_TileSet_Full.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreAll
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 593548ea1a6fbd0448f043ef3b62ec70
+    m_Address: Orange_TileSet_Full.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreAll
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 71513f6c5d3aa194ebf9fc5c33c947f1
+    m_Address: Purple_TileSet_Full.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreAll
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b8e7543ca3726e44d91b7a88f3ed665f
+    m_Address: Red_TileSet_Full.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreAll
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 491527004c6bac945b2eabd388184240, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 97dc7e196965ef947b6e9cdb9a6fd317, type: 2}
+    - {fileID: 11400000, guid: abccc9275520e2b41952f68b0b35e5c6, type: 2}
