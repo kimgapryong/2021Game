@@ -7,10 +7,12 @@ public class PlayerController : CretureController
     float time = 0.1f;
     Coroutine _cor;
     KeyCode _key;
+
+    CameraController cam;
     public override bool Init()
     {
         base.Init();
-
+        cam = Camera.main.GetComponent<CameraController>(); 
         return true;
     }
 
@@ -38,6 +40,10 @@ public class PlayerController : CretureController
                 _key = KeyCode.A;
                 _cor = StartCoroutine(StartEnumerator(time, Vector3Int.left));
             }
+        }
+        if(Input.GetKeyUp(_key))
+        {
+            
         }
     }
 

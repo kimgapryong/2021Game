@@ -6,13 +6,17 @@ using UnityEngine;
 public class InputManager
 {
     public Action<Vector3Int, Transform> moveAction;
-
+    private bool str = false;
+    public Vector3Int strVec;
     public void Init()
     {
         moveAction += PlayerMove;
     }
     public void PlayerMove(Vector3Int vec, Transform trans)
     {
+        if(str)
+            strVec = vec;
+
         Vector3Int vecInt = Vector3Int.FloorToInt(trans.position) + vec;
         Cell cell = Manager.Object.Grid.gridDic[vecInt];
 
@@ -22,10 +26,17 @@ public class InputManager
             return;
 
         trans.position = vecInt;
-      
+
 
         //플레이어 타일로 변경
-        if(cell != null ) 
-            cell.Type = Define.TileType.P_Tile;
+        if (cell == null)
+            return;
+
+        if(cell.Type == Define.TileType.P_Tile)
+        {
+
+            return;
+        }
+        cell.Type = Define.TileType.P_Tile;
     }
 }

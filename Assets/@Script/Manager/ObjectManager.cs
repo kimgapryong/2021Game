@@ -1,5 +1,7 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectManager
@@ -35,6 +37,15 @@ public class ObjectManager
             Player = pc;
 
             return pc as T;
+        }else if(type == typeof(CameraController))
+        {
+            GameObject cam = new GameObject("VirtualCam");
+
+            cam.GetOrAddComponent<CinemachineVirtualCamera>();
+
+            cam.GetOrAddComponent<CameraController>();
+            
+            return cam as T;
         }
 
 

@@ -21,8 +21,8 @@ public class GameManager
         this.yTile = yTile; 
         this.wallCount = wallCount;
 
-        //플레이어가 통과해야하는 불럭의 수
-        playerScore = ((xTile * yTile) - (wallCount * 5)) / 100 * 80;
+        //플레이어가 통과해야하는 불럭의 수w
+        playerScore = ((xTile * yTile) - (wallCount * 20)) / 100 * 80;
 
         action += AddTileScroe;
     }

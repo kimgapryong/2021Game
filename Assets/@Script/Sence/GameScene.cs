@@ -23,6 +23,7 @@ public class GameScene : MonoBehaviour
         gc.InitGrid();
 
         Manager.Object.Spwan<PlayerController>(new Vector3(1,1));
+        Manager.Object.Spwan<CameraController>(Vector2.zero);
 
     }
     // Update is called once per frame
