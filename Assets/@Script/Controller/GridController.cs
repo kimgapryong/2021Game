@@ -37,6 +37,7 @@ public class GridController : BaseController
 {
     //각 백터값마다 cell 관리
     public Dictionary<Vector3Int, Cell> gridDic = new Dictionary<Vector3Int, Cell>();
+    bool[,] closed;
 
     private Transform _root;
     public Transform Root
@@ -160,6 +161,7 @@ public class GridController : BaseController
             {
                 Cell cell = GetCell(new Vector3Int(x, y));
                 cell.Type = Define.TileType.P_Tile;
+
             }
         }
     }
@@ -273,11 +275,13 @@ public class GridController : BaseController
     {
         // 큐를 사용하여 셀을 처리합니다.
         Queue<Cell> cellsQueue = new Queue<Cell>(Manager.Input.cells);
-
         while (cellsQueue.Count > 0)
         {
             Cell current = cellsQueue.Dequeue();
             current.Type = Define.TileType.P_Tile;
         }
+
     }
+
+    
 }
