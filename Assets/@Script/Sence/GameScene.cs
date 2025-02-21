@@ -19,6 +19,9 @@ public class GameScene : MonoBehaviour
    
     void StartGame()
     {
+        GameObject ggg = new GameObject("dssdf");
+        ggg.AddComponent<SpriteRenderer>().sprite  = Manager.Resources.Load<Sprite>("Non.sprite");
+
         GridController gc = Manager.Object.Spwan<GridController>(Vector3.zero);
         gc.InitGrid();
 

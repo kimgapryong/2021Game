@@ -9,6 +9,7 @@ public class Define
         None,
         Normal,
         P_Tile,
+        P_Start,
         E_Tile,
         Wall,
     }
@@ -27,6 +28,7 @@ public class Define
         { TileType.None, "" },
         { TileType.Normal, "Blue_TileSet_Full.sprite" },
         { TileType.P_Tile, "Green_TileSet_Full.sprite" },
+        { TileType.P_Start, "Green_TileSet_Full.sprite"},
         { TileType.E_Tile, "Red_TileSet_Full.sprite" },
         { TileType.Wall, "Purple_TileSet_Full.sprite" }
     };

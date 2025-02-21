@@ -34,9 +34,10 @@ public class GameManager
             case Define.TileType.Normal:
                 switch (currentType)
                 {
-                    case Define.TileType.P_Tile:
+                    case Define.TileType.P_Start:
                         playerScore++;
                         cell.obj.GetComponent<SpriteRenderer>().sprite = Manager.Resources.Load<Sprite>(currentType.GetTileName());
+                        cell.obj.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .5f);
                         break;
 
                     case Define.TileType.E_Tile:
@@ -45,16 +46,17 @@ public class GameManager
                         break;
                 }
                 break;
-            case Define.TileType.P_Tile:
+            case Define.TileType.P_Start:
                 if(currentType == Define.TileType.E_Tile)
                 {
                     playerScore--;
                     enemyScore++;
                     cell.obj.GetComponent<SpriteRenderer>().sprite = Manager.Resources.Load<Sprite>(currentType.GetTileName());
+                    cell.obj.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .5f);
                 }
                 break;
             case Define.TileType.E_Tile:
-                if(currentType == Define.TileType.P_Tile)
+                if(currentType == Define.TileType.P_Start)
                 {
                     playerScore++;
                     enemyScore--;

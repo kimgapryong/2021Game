@@ -1,26 +1,33 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Cell
 {
     //TODO 플레이어 인지 적 인지 
 
     public GameObject obj;
+    public int x;
+    public int y;
 
     private Define.TileType _tileType = Define.TileType.Normal;
     public Define.TileType Type {get { return _tileType; }
         set
         {
-            if(value == Define.TileType.Normal || value == Define.TileType.Wall)
+            if(value == Define.TileType.Normal || value == Define.TileType.Wall || value == Define.TileType.P_Tile)
             {
                 _tileType = value;
                 obj.GetComponent<SpriteRenderer>().sprite = Manager.Resources.Load<Sprite>(_tileType.GetTileName());
+                obj.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+
             }
             else
             {
                 Manager.Game.action?.Invoke(_tileType, value, this);
+                _tileType = value;
             }
               
         }
@@ -65,6 +72,7 @@ public class GridController : BaseController
     private int plusWall = 20;
     // x / wallCount 
     Grid _grid;
+    List<Cell> cells;
 
     public override bool Init()
     {
@@ -93,9 +101,12 @@ public class GridController : BaseController
             for(int y = 0; y < yTile; y++)
             {
                 Cell cell = GetCell(new Vector3Int(x, y));
+                cell.x = x;
+                cell.y = y;
                 cell.Type = Define.TileType.Normal;
             } 
         }
+      
 
         for (int x = 0; x < xTile; x++)
         {
@@ -140,6 +151,15 @@ public class GridController : BaseController
                     xWall += wallPos;
                     yWall += wallPos;
                 }
+            }
+        }
+
+        for (int x = 1; x <= 3; x++)
+        {
+            for (int y = 1; y <= 3; y++)
+            {
+                Cell cell = GetCell(new Vector3Int(x, y));
+                cell.Type = Define.TileType.P_Tile;
             }
         }
     }
@@ -187,5 +207,77 @@ public class GridController : BaseController
             gridDic.Add(vec, cell);
         }
         return cell;
+    }
+
+    public void FullCell(Cell start)
+    {
+        if (start.Type == Define.TileType.P_Start)
+        {
+            Full_Pstart();
+            return;
+        }
+            
+        int count = 0;
+        Queue<Cell> cellsQueue = new Queue<Cell>();
+        cellsQueue.Enqueue(start);
+
+        while (cellsQueue.Count > 0)
+        {
+            count++;
+            if(count >= 10000)
+            {
+                Debug.Log("초과초과");
+                break;
+            }
+            Cell current = cellsQueue.Dequeue();
+            current.Type = Define.TileType.P_Tile;
+
+            GetCells(current, cellsQueue);
+        }
+
+        Full_Pstart();
+    }
+
+    private void GetCells(Cell cell, Queue<Cell> cellsQueue)
+    {
+        Vector3Int first = new Vector3Int(cell.x, cell.y);
+
+        int[] dirY = new int[4] { 1, 0, -1, 0 }; // 상, 좌, 하, 우
+        int[] dirX = new int[4] { 0, 1, 0, -1 };
+
+        for (int i = 0; i < dirX.Length; i++)
+        {
+            int x = dirX[i];
+            int y = dirY[i];
+            Vector3Int next = new Vector3Int(first.x + x, first.y + y); // 인접 셀
+            Cell nextCell = null;
+
+
+            if (!gridDic.TryGetValue(next, out nextCell) || nextCell == null)
+                continue;
+
+            // 인접 셀이 벽이거나 이미 P_Tile인 경우 건너뜁니다.
+            if (nextCell.Type == Define.TileType.Wall ||
+                nextCell.Type == Define.TileType.P_Tile ||
+                nextCell.Type == Define.TileType.P_Start ||
+                nextCell.x <= 0 || nextCell.y <= 0 ||
+                nextCell.x >= xTile - 1 || nextCell.y >= yTile - 1)
+                continue;
+
+            // 큐에 유효한 셀을 추가합니다.
+            cellsQueue.Enqueue(nextCell);
+        }
+    }
+
+    private void Full_Pstart()
+    {
+        // 큐를 사용하여 셀을 처리합니다.
+        Queue<Cell> cellsQueue = new Queue<Cell>(Manager.Input.cells);
+
+        while (cellsQueue.Count > 0)
+        {
+            Cell current = cellsQueue.Dequeue();
+            current.Type = Define.TileType.P_Tile;
+        }
     }
 }

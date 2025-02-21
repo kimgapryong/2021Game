@@ -47,6 +47,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreAll
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b8cf6035d8ecf6943a4b6ace610aa923
+    m_Address: Non_0.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreAll
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 491527004c6bac945b2eabd388184240, type: 2}
   m_SchemaSet:
