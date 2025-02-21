@@ -8,8 +8,9 @@ public class InputManager
     public Action<Vector3Int, Transform> moveAction;
 
     private bool str = false;
-
+    private bool non = false;
     public Vector3Int strVec = Vector3Int.zero;
+    public Vector3Int nonVec;
 
     public List<Cell> cells = new List<Cell>();
 
@@ -20,8 +21,21 @@ public class InputManager
     }
     public void PlayerMove(Vector3Int vec, Transform trans)
     {
-     
+        if (strVec != vec && !non && str)
+        {
+            nonVec = vec;
+            non = true;
+
+        }
+
+        if (!str && first != null)
+        {
+            strVec = vec;
+            str = true;
+        }
+            
       
+        
         Vector3Int vecInt = Vector3Int.FloorToInt(trans.position) + vec;
         Cell cell = Manager.Object.Grid.gridDic[vecInt]; //플레이어 다음 셀
 
@@ -33,12 +47,7 @@ public class InputManager
             return;
         if(cell.Type == Define.TileType.Normal && first == null)
             first = Manager.Object.Grid.gridDic[Vector3Int.FloorToInt(trans.position)];
-
-        if (!str && first != null)
-        {
-            strVec = vec;
-            str = true;
-        }
+      
 
         trans.position = vecInt;
         if (first == null)
@@ -51,28 +60,12 @@ public class InputManager
 
         if(cell.Type == Define.TileType.P_Tile) // 1 -> 최소 이동하여 불럭을 이동할 수 있는 수
         {
-            Vector3Int nexVec;
-            if(strVec.y > 0)
-            {
-                int result = cell.x - first.x;
-                if(result >= 0)
-                    nexVec = Vector3Int.right;
-                else
-                    nexVec = Vector3Int.left;
-            }
-            else
-            {
-                int result = cell.y - first.y;
-                if(result >= 0)
-                    nexVec = Vector3Int.up;
-                else
-                    nexVec = Vector3Int.down;
-            }
-            Cell startCell = Manager.Object.Grid.gridDic[new Vector3Int(first.x, first.y) + (strVec + nexVec)];
+
+            Cell startCell = Manager.Object.Grid.gridDic[new Vector3Int(first.x, first.y) + (strVec + nonVec)];
             Debug.Log(startCell.x + "/" + startCell.y);
             Debug.Log(strVec);
-            Debug.Log(nexVec);
-            Debug.Log(strVec + nexVec);
+            Debug.Log(nonVec);
+            Debug.Log(strVec + nonVec);
             Debug.Log(first.x + "/" + first.y);
             if (startCell == null)
                 Debug.LogError("셀 없음");
@@ -80,6 +73,7 @@ public class InputManager
             Manager.Object.Grid.FullCell(startCell);
 
             str = false;
+            non = false;
             first = null;
             
             return;
