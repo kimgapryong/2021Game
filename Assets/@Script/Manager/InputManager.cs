@@ -55,18 +55,22 @@ public class InputManager
             if(strVec.y > 0)
             {
                 int result = cell.x - first.x;
-                if(result >= 0)
+                if(result > 0)
                     nexVec = Vector3Int.right;
-                else
+                else if(result < 0)
                     nexVec = Vector3Int.left;
+                else 
+                    nexVec = Vector3Int.zero;
             }
             else
             {
                 int result = cell.y - first.y;
-                if(result >= 0)
+                if(result > 0)
                     nexVec = Vector3Int.up;
-                else
+                else if(result < 0)
                     nexVec = Vector3Int.down;
+                else 
+                    nexVec = Vector3Int.zero;
             }
             Cell startCell = Manager.Object.Grid.gridDic[new Vector3Int(first.x, first.y) + (strVec + nexVec)];
             Debug.Log(startCell.x + "/" + startCell.y);

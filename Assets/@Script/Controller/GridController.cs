@@ -213,12 +213,12 @@ public class GridController : BaseController
 
     public void FullCell(Cell start)
     {
-        if (start.Type == Define.TileType.P_Start)
+        if (start.Type == Define.TileType.P_Start || start.Type == Define.TileType.P_Tile)
         {
             Full_Pstart();
             return;
         }
-            
+
         int count = 0;
         Queue<Cell> cellsQueue = new Queue<Cell>();
         cellsQueue.Enqueue(start);
@@ -226,11 +226,12 @@ public class GridController : BaseController
         while (cellsQueue.Count > 0)
         {
             count++;
-            if(count >= 10000)
+            if (count >= 200)
             {
                 Debug.Log("段引段引");
                 break;
             }
+                
             Cell current = cellsQueue.Dequeue();
             current.Type = Define.TileType.P_Tile;
 
