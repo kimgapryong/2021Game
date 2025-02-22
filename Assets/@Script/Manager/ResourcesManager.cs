@@ -32,10 +32,21 @@ public class ResourcesManager
         GameObject obj = Load<GameObject>(name);
         if (obj == null) return null;
 
+        if(pooling)
+            return Manager.Pool.Pop(obj);
+
         GameObject clone = UnityEngine.Object.Instantiate(obj, trans);
         clone.name = name;
         clone.transform.position = vec;
         return clone;
+    }
+
+    public void Destroy(GameObject obj)
+    {
+        if (Manager.Pool.Push(obj))
+            return;
+
+        Destroy(obj);
     }
     public void LoadAsync<T>(string name, Action<T> callBack) where T : UnityEngine.Object
     {

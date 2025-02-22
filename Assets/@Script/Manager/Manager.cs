@@ -23,6 +23,9 @@ public class Manager : MonoBehaviour
 
     private InputManager _input = new InputManager();
     public static InputManager Input { get {  return Instance?._input; } }
+
+    private PoolManager _pool = new PoolManager();
+    public static PoolManager Pool {  get { return Instance?._pool; } }
     private void Awake()
     {
         Init();
