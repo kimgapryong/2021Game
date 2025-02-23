@@ -5,14 +5,24 @@ using UnityEngine;
 
 public class GameManager
 {
+    #region 게임 점수
     private int playerSuccsec;
     private int playerScore;
     private int enemyScore;
+    #endregion
 
+    #region 그리드 
     public int xTile;
     public int yTile;
     public int wallCount = 1;
-   
+    #endregion
+
+    #region 스폰 관련
+    public float spwanTime { get; private set; } = 3.0f;
+    public int maxCount { get; private set; } = 10;
+    public int current { get; set; } = 0;
+    #endregion
+
     public Action<Define.TileType, Define.TileType, Cell> action;
 
     public void Init(int xTile, int yTile, int wallCount )

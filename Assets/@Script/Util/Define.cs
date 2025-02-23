@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class Define
 {
+    public enum Icons
+    {
+        Preporties,
+    }
+
+    public enum Guns
+    {
+        Gun1,
+    }
     public enum TileType
     {
         None,
@@ -25,10 +34,10 @@ public class Define
     private static Dictionary<TileType, string> tileNameMapping = new Dictionary<TileType, string>
     {
         { TileType.None, "" },
-        { TileType.Normal, "Blue_TileSet_Full.sprite" },
-        { TileType.P_Tile, "Green_TileSet_Full.sprite" },
-        { TileType.E_Tile, "Red_TileSet_Full.sprite" },
-        { TileType.Wall, "Purple_TileSet_Full.sprite" }
+        { TileType.Normal, "Blue_TileSet_Full.tile" },
+        { TileType.P_Tile, "Green_TileSet_Full.tile" },
+        { TileType.E_Tile, "Red_TileSet_Full.tile" },
+        { TileType.Wall, "Purple_TileSet_Full.tile" }
     };
 
     public static string GetTileName(TileType type)

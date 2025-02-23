@@ -9,9 +9,24 @@ using UnityEngine.U2D;
 public class ResourcesManager
 {
     private Dictionary<string, UnityEngine.Object> dataDic = new Dictionary<string, UnityEngine.Object>();
-
+    private Dictionary<string, Sprite> spriteDic = new Dictionary<string, Sprite>();
+    private Dictionary<string, ScriptableObject> datableDic = new Dictionary<string, ScriptableObject>();
     public T Load<T>(string name) where T : UnityEngine.Object
     {
+        if (name.Contains(".sprite"))
+        {
+            if (spriteDic.TryGetValue(name, out Sprite sprite) == false)
+                return null;
+
+            return sprite as T;
+        }
+        if (name.Contains(".data"))
+        {
+            if(datableDic.TryGetValue(name, out ScriptableObject scriptableObject) == false)
+                return null;
+
+            return scriptableObject as T;
+        }
         if (dataDic.TryGetValue(name, out UnityEngine.Object objData) == false)
             return null;
 
@@ -52,13 +67,33 @@ public class ResourcesManager
     {
         string keyName = name;
         if (keyName.Contains(".sprite"))
-            keyName = $"{name}[{name.Replace(".sprite", "")}]";
-
-        Addressables.LoadAssetAsync<T>(keyName).Completed += (op) =>
         {
-            dataDic.Add(name, op.Result);
-            callBack?.Invoke(op.Result);
-        };
+           
+            Addressables.LoadAssetAsync<Sprite>(keyName).Completed += (op) =>
+            {
+                spriteDic.Add(name, op.Result);
+                callBack?.Invoke(op.Result as T);
+            };
+        }
+        else if (keyName.Contains(".data"))
+        {
+            Addressables.LoadAssetAsync<ScriptableObject>(keyName).Completed += (op) =>
+            {
+                datableDic.Add(name, op.Result);
+                callBack?.Invoke(name as T);
+            };
+        }
+        else
+        {
+            if(keyName.Contains(".tile"))
+                keyName = $"{name}[{name.Replace(".tile", "")}]";
+
+            Addressables.LoadAssetAsync<T>(keyName).Completed += (op) =>
+            {
+                dataDic.Add(name, op.Result);
+                callBack?.Invoke(op.Result);
+            };
+        }
     }
 
     public void LoadAllAsync<T>(string label, Action<string, int, int> callBack) where T : UnityEngine.Object

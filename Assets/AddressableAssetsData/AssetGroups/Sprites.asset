@@ -18,31 +18,31 @@ MonoBehaviour:
   m_GUID: b41977e0fd1a47d43a5c3d132de75d18
   m_SerializeEntries:
   - m_GUID: 1a6d85ad073f9cd4e976ffb4d9124349
-    m_Address: Blue_TileSet_Full.sprite
+    m_Address: Blue_TileSet_Full.tile
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreAll
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0e8812b7ed03dee4096fbe3e27581f1a
-    m_Address: Green_TileSet_Full.sprite
+    m_Address: Green_TileSet_Full.tile
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreAll
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 593548ea1a6fbd0448f043ef3b62ec70
-    m_Address: Orange_TileSet_Full.sprite
+    m_Address: Orange_TileSet_Full.tile
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreAll
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 71513f6c5d3aa194ebf9fc5c33c947f1
-    m_Address: Purple_TileSet_Full.sprite
+    m_Address: Purple_TileSet_Full.tile
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreAll
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b8e7543ca3726e44d91b7a88f3ed665f
-    m_Address: Red_TileSet_Full.sprite
+    m_Address: Red_TileSet_Full.tile
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreAll

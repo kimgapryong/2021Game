@@ -5,7 +5,12 @@ using UnityEngine;
 
 public class InputManager
 {
+    //이동
     public Action<Vector3Int, Transform> moveAction;
+
+    //클릭
+    public Action clickAction;
+
     private bool str = false;
     public Vector3Int strVec;
     public void Init()
@@ -27,16 +32,9 @@ public class InputManager
 
         trans.position = vecInt;
 
+        if(cell.Icons != null)
+            
 
-        //플레이어 타일로 변경
-        if (cell == null)
-            return;
-
-        if(cell.Type == Define.TileType.P_Tile)
-        {
-
-            return;
-        }
         cell.Type = Define.TileType.P_Tile;
     }
 }

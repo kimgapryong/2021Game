@@ -9,6 +9,10 @@ public class Cell
 
     public GameObject obj;
 
+    public GameObject Icons;
+
+    public int x;
+    public int y;
     private Define.TileType _tileType = Define.TileType.Normal;
     public Define.TileType Type {get { return _tileType; }
         set
@@ -93,6 +97,8 @@ public class GridController : BaseController
             for(int y = 0; y < yTile; y++)
             {
                 Cell cell = GetCell(new Vector3Int(x, y));
+                cell.x = x;
+                cell.y = y;
                 cell.Type = Define.TileType.Normal;
             } 
         }

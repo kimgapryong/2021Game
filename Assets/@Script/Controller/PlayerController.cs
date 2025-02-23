@@ -8,6 +8,7 @@ public class PlayerController : CretureController
     Coroutine _cor;
     KeyCode _key;
 
+    
     CameraController cam;
     public override bool Init()
     {
